@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://ajinsh.netlify.com/"
 theme = "cocoa-eh-hugo-theme"
 builddrafts = true
 canonifyurls = true
@@ -33,7 +33,7 @@ share = true
 # example: share_on_googleplus = false
 latestpostcount = 5
 github = "ajinsh"
-email = "ajinkya.shinde384@example.com"
+email = "ajinkya.shinde384@gmail.com"
 linkedin = "ajinsh"
 facebook = "BeingZoingz"
 social_banner = "img/banner.png"
