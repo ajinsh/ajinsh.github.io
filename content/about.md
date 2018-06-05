@@ -5,7 +5,9 @@ title = "About"
 
 Hi,there! I'm **Ajinkya Shinde**.
 
->**I'm a data science enthusiast and practitioner using latest data science toolstack like R, Python.**
+I'm a data science enthusiast and practitioner using latest data science toolstack like R, Python. 
+
+I'm also an experienced Business Intelligence professional and have worked on wide range of database and BI tools.
 
 I'm currently pursuing Master's in Computer Science at Portland State University and expect to graduate in June 2019.
 
