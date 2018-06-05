@@ -3,12 +3,10 @@ date = "2015-08-22"
 title = "About"
 +++
 
-*Heading 1*
+Hi,there! I'm **Ajinkya Shinde**.
 
-_With this theme, it is possible to add small sections that only contains one page like this. It will automatically appears in the header, at the end._
+>**I'm a data science enthusiast and practitioner using latest data science toolstack like R, Python.**
 
-Along with [Ford Prefect](https://en.wikipedia.org/wiki/Ford_Prefect_\(character\)), Dent barely escapes the Earth's destruction as it is demolished to make way for a *hyperspace bypass*. Arthur spends the next several years, still wearing his dressing gown, helplessly launched from crisis to crisis while trying to straighten out his lifestyle.  
- 
-> He rather enjoys tea, but seems to have trouble obtaining it in the far reaches of the galaxy.  
- 
-In time, he learns how to fly and carves a niche for himself as a sandwich-maker.
+I'm currently pursuing Master's in Computer Science at Portland State University and expect to graduate in June 2019.
+
+I graduated with a Bachelor's in Computer Engineering from University of Mumbai in June 2013. Having gained expertise as a Business Intelligence Consultant, I helped solve and answer business problems by leveraging existing datawarehouse and BI tools.It ultimately fueled my interest in data science and shaped my decision to pursue it as a career.In free time, I enjoy reading, hiking and learning from place called the _Internet_.
