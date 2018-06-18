@@ -7,7 +7,7 @@ output:
 
 ```{r xaringan-themer, include = FALSE}
 library(xaringanthemer)
-write_xaringan_theme(background_color="#ecf7ff", header_color = "#28056d", text_color = "#00000", code_inline_color = "#1b7183", code_highlight_color = "#3dcab9",header_h2_font_size = "28px")
+write_xaringan_theme(background_color="#ecf7ff", header_color = "#28056d", text_color = "#00000", code_inline_color = "#1b7183", code_highlight_color = "#3dcab9",header_h2_font_size = "28px", text_font_size = "25px")
 ```
 
 ```{r global_options, include=FALSE}
@@ -35,23 +35,26 @@ library(scales)
 #Dataset Intro
 
 
-* Data : Weather dataset for Portland - 2010 
+* Data : 
 
-* About : Climate and historical weather data and information from [NOAA's National Centers for Environmental Information(NCEI)](https://www.ncdc.noaa.gov/about) 
+1. Weather dataset for Portland - 2010 
 
-* Some of the datasets listed are :
+2. `Normals Daily` Dataset from [NOAA's (NCEI)](https://www.ncdc.noaa.gov/about) 
+
+3. Includes info. on vars such as temp. as per 1981-2000 Normals
+
+* Other datasets listed are :
 
 >	&#x270e; Daily Summaries  
   &#x270e; `Normals Daily`   
   &#x270e; Normals Hourly  
   &#x270e; Normals Monthly  
  
-* `Normals Daily` - includes info. on climatological variables such as temperature and precipitation as per 1981 - 2000 Normals
 
 ---
 class: middle,center
 
-#Dataset Exploration
+#Description - DATA
 
 
 ---
@@ -71,21 +74,34 @@ glimpse(w_2)
 
 *  Each record represents values measured at a station-day.
 
-1. STATION / STATION NAME (Max 50 Chars) : details about the  station(city/airport)
+--
 
-3. DATE (6 Digits) : Format `YYYYMMDD` 
+.pull-left[
 
-4. DLY.TAVG.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily avg. temp.
+**`Qualitative Var`**
 
-5. DLY.TMAX.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily maxi. temp.
+**STATION** : code  for the station  
 
-6. DLY.TMIN.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily min. temp.
+**STATION NAME** : name of the station   
+
+**DATE**: Date in format 'YYYYMMDD'  
+
+]
+
+--
+
+.pull-right[
+**`Quantitative Var`**
+
+**DLY TAVG NORMAL** : Daily Avg temp.
+
+**DLY TMAX NORMAL** : Daily Max temp.   
+
+**DLY TMIN NORMAL**: Daily Min temp
+
+]
 
 
-
----
-class: middle, center
-# DataViz 
 
 ---
 class: middle: center
@@ -107,9 +123,8 @@ class: middle: center
 
 
 ---
-
-
-And the answer is
+class: middle,center
+#And the answer is...
 
 ---
 background-image: url("images/Final_Plot.png")
@@ -164,3 +179,35 @@ class:middle,center
 background-image: url("images/Final_Plot.png")
 background-size: cover
 background-position: center
+---
+class:middle,center
+#Methods section
+
+---
+##1 :  Exploratory Data Analysis
+
+##2 : Define the question.
+
+##3 : Reiterate EDA until confirm.
+
+##4 : Transformed the data using `dplyr`, `ggplot`,`stringr` and `lubridate`.
+
+##5 : Choose appr. plot (Line Plot, Radar Plot, Heat Map, Weather Map).
+
+##6 : Clean-up the plot.
+---
+
+class:middle,center
+#Other Variant
+
+---
+background-image: url("images/Radial_Plot.png")
+background-size: cover
+background-position: center
+---
+
+class:middle,center
+#Thank You
+
+
+
