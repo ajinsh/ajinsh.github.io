@@ -1,0 +1,153 @@
+---
+title: Take A Sad Plot And Make It Better 2.0 - Graph 4
+author: Ajinkya Shinde
+date: '2018-06-18'
+slug: sad-plot-better-4
+categories: []
+tags:
+  - ggplot2
+  - tidyverse
+description: Desc
+hacker_news_id: ''
+lobsters_id: ''
+meta_img: /images/image.jpg
+---
+
+
+```{r warning=FALSE , error= FALSE, message=FALSE,echo=FALSE}
+library(here)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(extrafont)
+loadfonts(device="win")
+library(RColorBrewer)
+library(ggridges)
+```
+
+### 1. Relevant R Code
+
+```{r  warning=FALSE , error= FALSE, message=FALSE,echo=FALSE}
+hot_dogs <- read_csv(here("static","data", "hot_dog_contest.csv"), 
+    col_types = cols(
+      gender = col_factor(levels = NULL)
+    ))
+```
+
+
+```{r  warning=FALSE , error= FALSE, message=FALSE}
+
+"%||%" <- function(a, b) {
+  if (!is.null(a)) a else b
+}
+
+geom_flat_violin <- function(mapping = NULL, data = NULL, stat = "ydensity",position = "dodge", trim = TRUE, scale = "area",
+  show.legend = NA, inherit.aes = TRUE, ...) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomFlatViolin,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      trim = trim,
+      scale = scale,
+      ...
+    )
+  )
+}
+
+#' @rdname ggplot2-ggproto
+#' @format NULL
+#' @usage NULL
+#' @export
+GeomFlatViolin <-
+  ggproto("GeomFlatViolin", Geom,
+          setup_data = function(data, params) {
+            data$width <- data$width %||%
+              params$width %||% (resolution(data$x, FALSE) * 0.9)
+# ymin, ymax, xmin, and xmax define the bounding rectangle for each group
+            data %>%
+              group_by(group) %>%
+              mutate(ymin = min(y),
+                     ymax = max(y),
+                     xmin = x,
+                     xmax = x + width / 2)
+          },
+          
+          draw_group = function(data, panel_scales, coord) {
+            # Find the points for the line to go all the way around
+            data <- transform(data, xminv = x,
+                              xmaxv = x + violinwidth * (xmax - x))
+            
+            # Make sure it's sorted properly to draw the outline
+            newdata <- rbind(plyr::arrange(transform(data, x = xminv), y),
+                             plyr::arrange(transform(data, x = xmaxv), -y))
+            
+            # Close the polygon: set first and last point the same
+            # Needed for coord_polar and such
+            newdata <- rbind(newdata, newdata[1,])
+            
+            ggplot2:::ggname("geom_flat_violin", GeomPolygon$draw_panel(newdata, panel_scales, coord))
+          },
+          
+          draw_key = draw_key_polygon,
+          
+          default_aes = aes(weight = 1, colour = "grey20", fill = "white", size = 0.5,
+                            alpha = NA, linetype = "solid"),
+          
+          required_aes = c("x", "y")
+)
+ggplot(hot_dogs, aes(y = num_eaten, x = gender)) + 
+  geom_flat_violin(alpha=.5,fill = "#7570b3",
+                colour = NA,
+                na.rm = TRUE)+  
+geom_dotplot(aes(fill=gender),color="#695250",binaxis = "y", position = "dodge",dotsize=0.75, stackratio= 1.1)+
+  labs(y="Number Of Hot Dogs Eaten",x="Gender",title="Distribution of Nathan's Hot Dog across gender")+
+  scale_fill_brewer(type="qual",palette = 2,direction = -1)+
+   theme_minimal()+theme(text=element_text( family="Palatino Linotype"),legend.position="none")
+```
+
+
+
+### 2. Description of the TYPE of graph.
+
+The graph is a dot plot to measure the spread/distribution of hot dogs eaten during Nathan's hot dog contest across the gender
+
+### 3. Description of the DATA you used
+
+The data refers to the nathan's hotdog contest dataset. In this graph, the final data frame is 
+hot_dogs. The quantitative variable is stored in `num_eaten`  i.e. number of hot dogs eaten.The qualitative variable is the gender who ate the hot dogs
+
+
+### 4. Description of the AUDIENCE you are aiming for 
+
+The audience over here is someone who wants to see how each gender performed in the contest
+
+### 5. Representation Description:
+
+This graph shows the spread of hot dogs eaten across genders in the dataset
+
+### 6. How to read it & What to look for
+
+On x-axis lies the gender and on y-axis lies the number of hot dogs. 
+This is not the same as traditional histogram where the distribution is measured on x-axis but here the co-ordinates are flipped using `bin_axis=y`
+
+**Major Highlights**
+It seems that male have roughly extreme eating(either too low/high) habits as compared to the female who perform quite well since the 
+data is cluttered around the mean of hot dogs ate by female.
+
+### 7. Presentation tips
+
+Since, gender is a nominal variable ,have used the discrete color palette from ColorBrewer with `type="qual"`.
+
+
+### 8. Variations and alternatives
+
+Could have used violin plot as an alternative.
+
+### 9. How I created it
+
+I formulated the question of what exactly I want: I wanted to see how each gender performed in the hot dog contest.So I just used the variables `gender` and `num_eaten` to see the histogram. Then used two ways to represent distribution (dotplot,flat-violin-split).

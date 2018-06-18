@@ -1,0 +1,125 @@
+---
+title: Take A Sad Plot And Make It Better 2.0 - Graph 4
+author: Ajinkya Shinde
+date: '2018-06-18'
+slug: sad-plot-better-4
+categories: []
+tags:
+  - ggplot2
+  - tidyverse
+description: Desc
+hacker_news_id: ''
+lobsters_id: ''
+meta_img: /images/image.jpg
+---
+
+
+
+<div id="relevant-r-code" class="section level3">
+<h3>1. Relevant R Code</h3>
+<pre class="r"><code>&quot;%||%&quot; &lt;- function(a, b) {
+  if (!is.null(a)) a else b
+}
+
+geom_flat_violin &lt;- function(mapping = NULL, data = NULL, stat = &quot;ydensity&quot;,position = &quot;dodge&quot;, trim = TRUE, scale = &quot;area&quot;,
+  show.legend = NA, inherit.aes = TRUE, ...) {
+  layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomFlatViolin,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      trim = trim,
+      scale = scale,
+      ...
+    )
+  )
+}
+
+#&#39; @rdname ggplot2-ggproto
+#&#39; @format NULL
+#&#39; @usage NULL
+#&#39; @export
+GeomFlatViolin &lt;-
+  ggproto(&quot;GeomFlatViolin&quot;, Geom,
+          setup_data = function(data, params) {
+            data$width &lt;- data$width %||%
+              params$width %||% (resolution(data$x, FALSE) * 0.9)
+# ymin, ymax, xmin, and xmax define the bounding rectangle for each group
+            data %&gt;%
+              group_by(group) %&gt;%
+              mutate(ymin = min(y),
+                     ymax = max(y),
+                     xmin = x,
+                     xmax = x + width / 2)
+          },
+          
+          draw_group = function(data, panel_scales, coord) {
+            # Find the points for the line to go all the way around
+            data &lt;- transform(data, xminv = x,
+                              xmaxv = x + violinwidth * (xmax - x))
+            
+            # Make sure it&#39;s sorted properly to draw the outline
+            newdata &lt;- rbind(plyr::arrange(transform(data, x = xminv), y),
+                             plyr::arrange(transform(data, x = xmaxv), -y))
+            
+            # Close the polygon: set first and last point the same
+            # Needed for coord_polar and such
+            newdata &lt;- rbind(newdata, newdata[1,])
+            
+            ggplot2:::ggname(&quot;geom_flat_violin&quot;, GeomPolygon$draw_panel(newdata, panel_scales, coord))
+          },
+          
+          draw_key = draw_key_polygon,
+          
+          default_aes = aes(weight = 1, colour = &quot;grey20&quot;, fill = &quot;white&quot;, size = 0.5,
+                            alpha = NA, linetype = &quot;solid&quot;),
+          
+          required_aes = c(&quot;x&quot;, &quot;y&quot;)
+)
+ggplot(hot_dogs, aes(y = num_eaten, x = gender)) + 
+  geom_flat_violin(alpha=.5,fill = &quot;#7570b3&quot;,
+                colour = NA,
+                na.rm = TRUE)+  
+geom_dotplot(aes(fill=gender),color=&quot;#695250&quot;,binaxis = &quot;y&quot;, position = &quot;dodge&quot;,dotsize=0.75, stackratio= 1.1)+
+  labs(y=&quot;Number Of Hot Dogs Eaten&quot;,x=&quot;Gender&quot;,title=&quot;Distribution of Nathan&#39;s Hot Dog across gender&quot;)+
+  scale_fill_brewer(type=&quot;qual&quot;,palette = 2,direction = -1)+
+   theme_minimal()+theme(text=element_text( family=&quot;Palatino Linotype&quot;),legend.position=&quot;none&quot;)</code></pre>
+<p><img src="/blog/sad-plot-better-4_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="description-of-the-type-of-graph." class="section level3">
+<h3>2. Description of the TYPE of graph.</h3>
+<p>The graph is a dot plot to measure the spread/distribution of hot dogs eaten during Nathan’s hot dog contest across the gender</p>
+</div>
+<div id="description-of-the-data-you-used" class="section level3">
+<h3>3. Description of the DATA you used</h3>
+<p>The data refers to the nathan’s hotdog contest dataset. In this graph, the final data frame is hot_dogs. The quantitative variable is stored in <code>num_eaten</code> i.e. number of hot dogs eaten.The qualitative variable is the gender who ate the hot dogs</p>
+</div>
+<div id="description-of-the-audience-you-are-aiming-for" class="section level3">
+<h3>4. Description of the AUDIENCE you are aiming for</h3>
+<p>The audience over here is someone who wants to see how each gender performed in the contest</p>
+</div>
+<div id="representation-description" class="section level3">
+<h3>5. Representation Description:</h3>
+<p>This graph shows the spread of hot dogs eaten across genders in the dataset</p>
+</div>
+<div id="how-to-read-it-what-to-look-for" class="section level3">
+<h3>6. How to read it &amp; What to look for</h3>
+<p>On x-axis lies the gender and on y-axis lies the number of hot dogs. This is not the same as traditional histogram where the distribution is measured on x-axis but here the co-ordinates are flipped using <code>bin_axis=y</code></p>
+<p><strong>Major Highlights</strong> It seems that male have roughly extreme eating(either too low/high) habits as compared to the female who perform quite well since the data is cluttered around the mean of hot dogs ate by female.</p>
+</div>
+<div id="presentation-tips" class="section level3">
+<h3>7. Presentation tips</h3>
+<p>Since, gender is a nominal variable ,have used the discrete color palette from ColorBrewer with <code>type=&quot;qual&quot;</code>.</p>
+</div>
+<div id="variations-and-alternatives" class="section level3">
+<h3>8. Variations and alternatives</h3>
+<p>Could have used violin plot as an alternative.</p>
+</div>
+<div id="how-i-created-it" class="section level3">
+<h3>9. How I created it</h3>
+<p>I formulated the question of what exactly I want: I wanted to see how each gender performed in the hot dog contest.So I just used the variables <code>gender</code> and <code>num_eaten</code> to see the histogram. Then used two ways to represent distribution (dotplot,flat-violin-split).</p>
+</div>

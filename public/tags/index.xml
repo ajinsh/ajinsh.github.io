@@ -21,6 +21,24 @@
     </item>
     
     <item>
+      <title>Dplyr</title>
+      <link>/tags/dplyr/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/dplyr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ggplot2</title>
+      <link>/tags/ggplot2/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ggplot2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Go</title>
       <link>/tags/go/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
@@ -57,15 +75,6 @@
     </item>
     
     <item>
-      <title>Projects</title>
-      <link>/tags/projects/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/projects/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>R Markdown</title>
       <link>/tags/r-markdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
@@ -98,6 +107,15 @@
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>/tags/themes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tidyverse</title>
+      <link>/tags/tidyverse/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tidyverse/</guid>
       <description></description>
     </item>
     

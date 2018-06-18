@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidyverse on Ajinkya Shinde</title>
+    <link>/tags/tidyverse/</link>
+    <description>Recent content in Tidyverse on Ajinkya Shinde</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Take A Sad Plot And Make It Better 2.0 - Graph 4</title>
+      <link>/blog/sad-plot-better-4/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/sad-plot-better-4/</guid>
+      <description>1. Relevant R Code&amp;quot;%||%&amp;quot; &amp;lt;- function(a, b) {if (!is.null(a)) a else b}geom_flat_violin &amp;lt;- function(mapping = NULL, data = NULL, stat = &amp;quot;ydensity&amp;quot;,position = &amp;quot;dodge&amp;quot;, trim = TRUE, scale = &amp;quot;area&amp;quot;,show.legend = NA, inherit.aes = TRUE, ...) {layer(data = data,mapping = mapping,stat = stat,geom = GeomFlatViolin,position = position,show.legend = show.legend,inherit.aes = inherit.aes,params = list(trim = trim,scale = scale,.</description>
+    </item>
+    
+    <item>
+      <title>Take A Sad Plot And Make It Better 2.0 - Graph 3</title>
+      <link>/blog/sad-plot-better-3/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/sad-plot-better-3/</guid>
+      <description>1. Relevant R Codemoma &amp;lt;- read_csv(here(&amp;quot;static&amp;quot;, &amp;quot;data&amp;quot;, &amp;quot;artworks-cleaned.csv&amp;quot;))f_moma&amp;lt;-moma %&amp;gt;%filter(artist_gender == &amp;quot;Female&amp;quot;) f_moma2&amp;lt;-count(f_moma,year_created,artist_gender)ggplot(f_moma2,aes(x=year_created,y=n))+geom_col(colour = &amp;quot;#414a4c&amp;quot;,fill=&amp;quot;#d26868&amp;quot;)+scale_y_continuous(expand = c(0, 0)) +scale_x_continuous(expand = c(0, 0))+labs(x=&amp;quot;Year paintings were created&amp;quot;,y=&amp;quot;Number of Paintings created&amp;quot;,title=&amp;quot;MoMA, Female paintings over the years&amp;quot;)+geom_smooth(model=lm,se=FALSE,color=&amp;quot;#5e020c&amp;quot;)+theme_tufte(base_family = &amp;quot;Palatino Linotype&amp;quot;) +theme(plot.title = element_text(hjust = 0.5)) 2. Description of the TYPE of graph.The graph is a bar chart with the geom_smooth line showing the trend line.</description>
+    </item>
+    
+    <item>
+      <title>Take A Sad Plot And Make It Better 2.0 - Graph 2</title>
+      <link>/blog/sad-plot-better-2/</link>
+      <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/sad-plot-better-2/</guid>
+      <description>1. Relevant R-Codecereal_untidy&amp;lt;-read.csv(file=&amp;quot;../../static/data/cereal.csv&amp;quot;)cereal_tidy&amp;lt;-cereal_untidy %&amp;gt;% gather(nutrition,nutr_stat,c(&amp;quot;calories&amp;quot;,&amp;quot;protein&amp;quot;,&amp;quot;fat&amp;quot;,&amp;quot;sodium&amp;quot;,&amp;quot;fiber&amp;quot;,&amp;quot;carbo&amp;quot;,&amp;quot;sugars&amp;quot;,&amp;quot;potass&amp;quot;,&amp;quot;vitamins&amp;quot;)) %&amp;gt;% select(name,mfr,type,nutrition,nutr_stat) %&amp;gt;% filter(nutrition==c(&amp;quot;calories&amp;quot;,&amp;quot;protein&amp;quot;,&amp;quot;fat&amp;quot;,&amp;quot;carbo&amp;quot;))ggplot(cereal_tidy)+geom_mosaic(aes(x=product(nutrition,mfr),fill=factor(nutrition))) + labs(x=&amp;quot;Manufacturer&amp;quot;, y =&amp;quot;Nutrition Breakdown&amp;quot;) +guides(fill=guide_legend(title = &amp;quot;Nutrient&amp;quot;, reverse = TRUE))2. Description of the TYPE of graphThis type of graph is a Marimekko chart
+3. Description of the DATA you usedThe data is gathered from Kaggle Dataset.It gives the nutrient information(such as calories,fat,protein etc.) for all the cereals across selected 7 brands.</description>
+    </item>
+    
+  </channel>
+</rss>

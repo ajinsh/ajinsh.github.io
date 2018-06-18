@@ -1,0 +1,31 @@
+
+.tocify{
+   border: none !important;
+    border-radius-color: #ffffff;
+    background-color: transparent;  
+    color: #68707c;
+    font-size: 13.25px;
+}
+
+.toc-content {
+  
+  border-left:2px solid #4d5665;
+}
+
+
+.list-group-item.active, .list-group-item.active:focus,
+.list-group-item.active:hover 
+ {
+    background-color: transparent;
+    color: #222222;
+    font-weight:bold;
+    border-left-color: #222222;
+     border-top-color: #ffffff;
+     border-bottom-color: #ffffff;
+     border-right-color: #ffffff;
+    text-decoration: underline;
+    
+}
+
+
+

@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:900i');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h2,h3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight:normal;
+}
+

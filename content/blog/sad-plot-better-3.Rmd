@@ -1,0 +1,102 @@
+---
+title: Take A Sad Plot And Make It Better 2.0 - Graph 3
+author: Ajinkya Shinde
+date: '2018-06-16'
+slug: sad-plot-better-3
+categories: []
+tags:
+  - ggplot2
+  - dplyr
+  - tidyverse
+description: Desc
+hacker_news_id: ''
+lobsters_id: ''
+meta_img: /images/image.jpg
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r warning=FALSE , error= FALSE, message=FALSE,echo=FALSE}
+library(here) # to set file path if working from local file
+library(tidyverse) # 
+library(tidyr)
+library(readr)
+library(ggthemes)
+library(extrafont)
+loadfonts(device="win")
+```
+
+
+### 1. Relevant R Code
+
+
+```{r message=FALSE,warning=FALSE}
+moma <- read_csv(here("static", "data", "artworks-cleaned.csv"))
+
+f_moma<-moma %>%
+  filter(artist_gender == "Female")  
+
+ 
+f_moma2<-count(f_moma,year_created,artist_gender)
+
+
+ggplot(f_moma2,aes(x=year_created,y=n))+
+  geom_col(colour = "#414a4c",fill="#d26868")+
+    scale_y_continuous(expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0))+
+  labs(x="Year paintings were created",y="Number of 
+       Paintings created",
+    title="MoMA, Female paintings over the years")+
+  geom_smooth(model=lm,se=FALSE,color="#5e020c")+
+  theme_tufte(base_family = "Palatino Linotype") +
+  theme(plot.title = element_text(hjust = 0.5)) 
+
+
+```
+
+
+
+### 2. Description of the TYPE of graph.
+
+The graph is a bar chart with the geom_smooth line showing the trend line.
+
+### 3. Description of the DATA you used
+
+The data refers to the moma dataset. In this graph, the final data frame is 
+f_moma2(final moma). The quantitative variable is the count of number of paintings created.The qualitative variable is the year during which the paintings were created
+
+
+### 4. Description of the AUDIENCE you are aiming for 
+
+The audience over here is someone who wants to see the paintings done by women over the years 
+
+### 5. Representation Description:
+
+This graph shows the count of number of paintings done by women across the years.
+
+### 6. How to read it & What to look for
+
+For year-gap on x-axis, read the number of paintings created during that 
+period. 
+
+
+**Major Highlights**
+It seems that Women actually painted more paintings during the year 1960-2000. Also,the highest number of paintings(15) around 1985-1990.
+
+### 7. Presentation tips
+
+Using scale_x_continuous and scale_y_continuous, the padding at the starting and ending of the x-axis has been removed. The color scheme used is in relation to the artist-gender(female). The trend line has been added to get the sense of overall increase/decrease using geom_smooth
+
+
+
+### 8. Variations and alternatives
+This plot can be improved by including the Male gender to see how the Female's performed wrt Male artists.
+
+
+### 9. How I created it
+
+I formulated the question of what exactly I want: I have to see the diversity in the paintings created as per artist's gender. First, I filtered the data-set on Male and Female. But due to large number of overlapping points , the stacked bar chart wasn't the perfect fit. So, I decided to go with only one gender. 
+Due to uncontinuity in the year column, the geom_line wasn't the perfect fit, so decided to go with geom_col
+

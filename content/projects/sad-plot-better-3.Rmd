@@ -1,0 +1,178 @@
+---
+title: "TAKE A SAD PLOT AND MAKE IT BETTER 3.0"
+author: "Ajinkya Shinde"
+date: "2018-06-18T06:09:00-08:00"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE,warning=FALSE,message=FALSE,error=FALSE}
+library(dplyr)
+library(tidyverse)
+library(stringr)
+library(lubridate)
+library(ggplot2)
+library(forcats)
+library(grDevices)
+library(plotrix)
+library(RColorBrewer)
+library(extrafont)
+library(scales)
+
+```
+
+#1. Relevant R Code
+
+```{r warning= FALSE, message= FALSE}
+
+w_2<-read.csv("../../static/data/1374765.csv")
+
+w_2<- w_2 %>% mutate(MDate=as.character(DATE)) %>% 
+  filter(STATION=="GHCND:USW00024229") %>% 
+  select(MDate,DLY.TMAX.NORMAL) %>% 
+  mutate(MDate=ymd(MDate))
+
+w_monthly<- w_2 %>% 
+  mutate(FMonth=month((MDate),label = FALSE),
+         TotDM=days_in_month(MDate),
+         FDay=day(MDate)) 
+
+
+llabels <- c("1"="Jan","2"="Feb","3"="Mar","4"="Apr","5"="May","6"="Jun","7"="Jul",
+           "8"="Aug","9"="Sep","10"="Oct","11"="Nov","12"="Dec")
+
+n1<-c("gray63","gray63","gray63","gray63","gray63","gray63","gold","orange","gray63",
+      "gray63","gray63","gray63")
+ggplot(w_monthly,aes(x=as.factor(FDay),
+                     y=DLY.TMAX.NORMAL,
+                    colour=as.factor(FMonth),
+                    group=as.factor(FMonth)))+
+  geom_line(alpha=0.5) + 
+  geom_point(alpha=0.5)+
+  geom_point(data=filter(w_monthly,FMonth %in% c(7) ),color="gold",alpha=0.5)+
+  geom_line(data=filter(w_monthly,FMonth %in% c(7) ),color="gold",alpha=0.5)+
+  geom_point(data=filter(w_monthly,FMonth %in% c(8) ),color="orange",alpha=0.5)+
+  geom_line(data=filter(w_monthly,FMonth %in% c(8) ),color="orange",alpha=0.5)+
+  geom_point(data=filter(w_monthly,DLY.TMAX.NORMAL==82.3 ),color="red2")+
+  geom_text(data = filter(w_monthly,FDay %in% c(3)),
+            color = "gray63",
+            aes(label =month(MDate,label=TRUE)),
+            vjust="top"
+            )+
+  geom_text(data = filter(w_monthly,DLY.TMAX.NORMAL==82.3 & FDay>20 ),
+            color = "red2",
+            aes(label = ceiling(DLY.TMAX.NORMAL)),size=2.9,
+            vjust=-1,
+            hjust=1.3,nudge_x = 0.5
+  )+
+  geom_text(data = filter(w_monthly,DLY.TMAX.NORMAL==82.3 & FDay<20 ),
+            color = "red2",
+            aes(label = ceiling(DLY.TMAX.NORMAL)),size=2.9,
+            vjust=-1,
+            hjust=-0.1
+  )+
+  
+  scale_y_continuous(limits = c(42,85)
+                     )+
+  theme_minimal() +
+  labs(title="Avg. daily max temp over the months in Portland  for the year 2010",
+       subtitle="The daily max temp of 83 °F lasted for 7 days",
+       caption="Data Source: NOAA's 1981-2010 Climate Normals",
+       color = "Months", 
+       x="Day in a Month",
+       y="Avg. Daily Max. Temperature(°F)") +
+  scale_colour_manual(values=n1,labels=llabels)+
+  theme(
+        panel.grid.major = element_line(linetype = 2,color="#dddddd"), 
+        panel.grid.minor = element_line(linetype = 3,color="#dddddd"), 
+        axis.text = element_text(face="bold",color="black"),
+        axis.line.x = element_line(linetype =1,color = "black"),
+        axis.ticks.x = element_line(linetype =1,color = "black"),
+        axis.ticks.y = element_line(linetype=1,color = "black"),
+        plot.caption = element_text(size  ="7")
+        )
+
+
+```
+
+#2. Description of the Type of Graph
+
+This is a line chart used to show the weather dataset. Since, most time series dataset use a trend line chart, I decided to settle with this.
+
+
+
+
+#3. Description of the DATA used
+
+```{r}
+glimpse(w_2)
+```
+The Data consists of nominal/qualitative variables - station and station names and the quantitative variables are `DLY-TAVG-NORMAL`,`DLY-TMAX-NORMAL`,`DLY-TMIN-NORMAL` which are calculated as running averages over the period (1981-2000). Here, the variable name itself suggests the meaning i.e. TAVG-NORMAL means daily average temperature, TMAX-NORMAL means daily max temperature, TMIN-NORMAL means daily min. temperature.
+
+
+#4. Description of the _AUDIENCE_
+
+This dataset can be used by an weather analyst / general public who wants to see the annual weather highlights for Portland in the year 2010. It can also be published in a scientific journal or a newspaper article.
+
+
+#5. Representation description
+
+In the above graph, we are trying to see which day was the warmest/hottest in Portland for the year 2010. 
+
+
+#6. How to read it & what to look for?
+
+The first point of interaction with the graph is reading the title and then the subtitle. In this way, one can decipher the meaning of the plot. After reading the title, subtitle, we see that the graph is showing the daily avg temperature for each day of the month. It also shows the highlighted maximum temperature for the whole year i.e 83°F and that it lasted for approx. 7 consecutive days.
+
+
+#7. Presentation Tips:
+
+I have used qualitative color palette "Paired" from ColorBrewer  for the 12 month trend lines since there are only two available palettes with 12 colors. The x-axis
+and the y-axis text,major and minor gridlines are colored for emphasis and effect. The scale for y axis represents avg. temperature measured in
+Fahrenheit and is bucketed with limits from start limit= 42 to end limit=85. The x-axis is a factored day variable to represent each days in a month. To annotate the highest temperature, the dot point for highest temp. is given a color "red". Also, corresponding month trendline with highest temperature are highlighted, but the remaining months trend line is shadowed with a gray color.
+
+
+#8. Variations and creations:
+
+Below is another graph. A radial plot to show the highest day temperature for each month. 
+
+```{r}
+plabels<-c("Jan","Feb","Mar","Apr","May","Jun","Jul",
+        "Aug","Sep","Oct","Nov","Dec")
+
+p<-geom_line(data=filter(w_monthly,FMonth %in% c(7,8) ))
+
+
+lpos<-c(0,30,60,90,120,150,180,210,240,270,300,330)  
+
+polar.plot(lengths= w_monthly$DLY.TMAX.NORMAL,
+           label.pos = lpos,labels = plabels,
+           main="Test Polar Plot",
+           start=90,clockwise=TRUE,lwd=3,line.col="4",
+           rp.type = "p")
+
+```
+
+
+#9. How I created it?
+
+Steps I followed while creating it:
+
+##9.1 Dataset Finalizing 
+
+The NOAA's website gives access to lot of datasets. However, the values specified in the dataset means different in different dataset.The Daily Max temperature in the Daily Normals dataset means the maximum temperature for a given day. But , the daily max temperature in the Daily Hourly dataset is not the decomposition of the day value across 2 hours. So, I had to switch from the daily hourly dataset to daily normals 
+dataset.Another factor for choosing the dataset was the question to be answered from the dataset. It was somewhat difficult to come up with any sort of meaningful trend/question after combining yearly datasets.
+
+##9.2 Choosing appropriate graph
+
+Since it was a weather dataset, I had envisioned mainly two charts- Radial Plot, Line Charts.Also,google answered charts like heat map, geographic map charts, I finally decided to settle with the Line Chart.I decided this after my ugly rendezvous with the radial plot.
+
+##9.3 Visualizing the plot
+
+The inspiration for visualizing the plot is from Alison's demo for the grouped line plot. To visualize the monthwise trend for the dataset closely aligned with that plot. Also, the pop-out effect demo plot by Alison was the perfect way to make the insight stand out from the 
+visualization.
+

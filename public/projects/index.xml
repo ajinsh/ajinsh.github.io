@@ -6,20 +6,18 @@
     <description>Recent content in Projects on Ajinkya Shinde</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Jun 2018 06:09:00 -0800</lastBuildDate>
     
 	<atom:link href="/projects/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A small project example : add yours !</title>
-      <link>/projects/small-project/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      <title>TAKE A SAD PLOT AND MAKE IT BETTER 3.0</title>
+      <link>/projects/sad-plot-better-3/</link>
+      <pubDate>Mon, 18 Jun 2018 06:09:00 -0800</pubDate>
       
-      <guid>/projects/small-project/</guid>
-      <description>Along with Ford Prefect, Dent barely escapes the Earth&amp;rsquo;s destruction as it is demolished to make way for a hyperspace bypass. Arthur spends the next several years, still wearing his dressing gown, helplessly launched from crisis to crisis while trying to straighten out his lifestyle.
- He rather enjoys tea, but seems to have trouble obtaining it in the far reaches of the galaxy.
- In time, he learns how to fly and carves a niche for himself as a sandwich-maker.</description>
+      <guid>/projects/sad-plot-better-3/</guid>
+      <description>1. Relevant R Codew_2&amp;lt;-read.csv(&amp;quot;../../static/data/1374765.csv&amp;quot;)w_2&amp;lt;- w_2 %&amp;gt;% mutate(MDate=as.character(DATE)) %&amp;gt;% filter(STATION==&amp;quot;GHCND:USW00024229&amp;quot;) %&amp;gt;% select(MDate,DLY.TMAX.NORMAL) %&amp;gt;% mutate(MDate=ymd(MDate))w_monthly&amp;lt;- w_2 %&amp;gt;% mutate(FMonth=month((MDate),label = FALSE),TotDM=days_in_month(MDate),FDay=day(MDate)) llabels &amp;lt;- c(&amp;quot;1&amp;quot;=&amp;quot;Jan&amp;quot;,&amp;quot;2&amp;quot;=&amp;quot;Feb&amp;quot;,&amp;quot;3&amp;quot;=&amp;quot;Mar&amp;quot;,&amp;quot;4&amp;quot;=&amp;quot;Apr&amp;quot;,&amp;quot;5&amp;quot;=&amp;quot;May&amp;quot;,&amp;quot;6&amp;quot;=&amp;quot;Jun&amp;quot;,&amp;quot;7&amp;quot;=&amp;quot;Jul&amp;quot;,&amp;quot;8&amp;quot;=&amp;quot;Aug&amp;quot;,&amp;quot;9&amp;quot;=&amp;quot;Sep&amp;quot;,&amp;quot;10&amp;quot;=&amp;quot;Oct&amp;quot;,&amp;quot;11&amp;quot;=&amp;quot;Nov&amp;quot;,&amp;quot;12&amp;quot;=&amp;quot;Dec&amp;quot;)n1&amp;lt;-c(&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gold&amp;quot;,&amp;quot;orange&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;)ggplot(w_monthly,aes(x=as.factor(FDay),y=DLY.TMAX.NORMAL,colour=as.factor(FMonth),group=as.factor(FMonth)))+geom_line(alpha=0.5) + geom_point(alpha=0.5)+geom_point(data=filter(w_monthly,FMonth %in% c(7) ),color=&amp;quot;gold&amp;quot;,alpha=0.5)+geom_line(data=filter(w_monthly,FMonth %in% c(7) ),color=&amp;quot;gold&amp;quot;,alpha=0.5)+geom_point(data=filter(w_monthly,FMonth %in% c(8) ),color=&amp;quot;orange&amp;quot;,alpha=0.5)+geom_line(data=filter(w_monthly,FMonth %in% c(8) ),color=&amp;quot;orange&amp;quot;,alpha=0.5)+geom_point(data=filter(w_monthly,DLY.TMAX.NORMAL==82.3 ),color=&amp;quot;red2&amp;quot;)+geom_text(data = filter(w_monthly,FDay %in% c(3)),color = &amp;quot;gray63&amp;quot;,aes(label =month(MDate,label=TRUE)),vjust=&amp;quot;top&amp;quot;)+geom_text(data = filter(w_monthly,DLY.TMAX.NORMAL==82.3 &amp;amp; FDay&amp;gt;20 ),color = &amp;quot;red2&amp;quot;,aes(label = ceiling(DLY.</description>
     </item>
     
     <item>
@@ -28,8 +26,7 @@
       <pubDate>Wed, 19 Aug 2015 20:29:37 -0700</pubDate>
       
       <guid>/projects/projects/</guid>
-      <description>In this theme, it is possible to add sections like a Projects one for example. You can add plenty of articles about your projects and a presentation page that will be displayed before the list. All is modulable, if you don&amp;rsquo;t want something.
-A Hollywood-funded film version, produced and filmed in the UK, was released in April 2005, and radio adaptations of the third, fourth, and fifth novels were broadcast from 2004 to 2005.</description>
+      <description>Here is my final project Data Visualization slide deck. Enjoy!</description>
     </item>
     
   </channel>

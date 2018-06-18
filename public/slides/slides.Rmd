@@ -1,0 +1,166 @@
+--- 
+
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css","css/gadget.css"]
+---
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+write_xaringan_theme(background_color="#ecf7ff", header_color = "#28056d", text_color = "#00000", code_inline_color = "#1b7183", code_highlight_color = "#3dcab9",header_h2_font_size = "28px")
+```
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set( warning=FALSE, message=FALSE,fig.align = "center", out.width = "80%",cache = FALSE)
+library(dplyr)
+library(tidyverse)
+library(stringr)
+library(lubridate)
+library(ggplot2)
+library(forcats)
+library(grDevices)
+library(plotrix)
+library(RColorBrewer)
+library(extrafont)
+library(scales)
+
+```
+
+
+#_Take A Sad Plot And Make It Better 3.0_
+##Ajinkya Shinde
+
+---
+
+#Dataset Intro
+
+
+* Data : Weather dataset for Portland - 2010 
+
+* About : Climate and historical weather data and information from [NOAA's National Centers for Environmental Information(NCEI)](https://www.ncdc.noaa.gov/about) 
+
+* Some of the datasets listed are :
+
+>	&#x270e; Daily Summaries  
+  &#x270e; `Normals Daily`   
+  &#x270e; Normals Hourly  
+  &#x270e; Normals Monthly  
+ 
+* `Normals Daily` - includes info. on climatological variables such as temperature and precipitation as per 1981 - 2000 Normals
+
+---
+class: middle,center
+
+#Dataset Exploration
+
+
+---
+
+* Read dataset from `csv` 
+
+```{r warning=FALSE,message=FALSE,fig.width=8}
+w_2<-read.csv("../data/1374765.csv")
+glimpse(w_2)
+```
+
+
+---
+
+
+
+
+*  Each record represents values measured at a station-day.
+
+1. STATION / STATION NAME (Max 50 Chars) : details about the  station(city/airport)
+
+3. DATE (6 Digits) : Format `YYYYMMDD` 
+
+4. DLY.TAVG.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily avg. temp.
+
+5. DLY.TMAX.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily maxi. temp.
+
+6. DLY.TMIN.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily min. temp.
+
+
+
+---
+class: middle, center
+# DataViz 
+
+---
+class: middle: center
+#Questions?
+
+--
+
+#_What?_ 
+
+--
+
+#`Warmest Temp.` in Portland in the year 2010
+
+--
+#_When?_
+
+--
+#`Day`
+
+
+---
+
+
+And the answer is
+
+---
+background-image: url("images/Final_Plot.png")
+background-size: cover
+background-position: center
+
+---
+class: middle,center
+#Now let's do a walkthrough
+
+--
+
+#`Step 1: Let's Define the axis`
+---
+background-image: url("images/Step1.png")
+background-size: cover
+background-position: center
+
+---
+class:middle,center
+#`Step 2: Plot the data`
+---
+background-image: url("images/Step2_1.png")
+background-size: cover
+background-position: center
+
+---
+background-image: url("images/Step2_2.png")
+background-size: cover
+background-position: center
+
+
+
+---
+class:middle,center
+#`Step 3: Cleanup the plot`
+##Include only relevant details
+---
+background-image: url("images/Step3_1.png")
+background-size: cover
+background-position: center
+
+---
+background-image: url("images/Step3_2.png")
+background-size: cover
+background-position: center
+---
+class:middle,center
+#`Step 4: Finally...`
+###Prettify the plot
+---
+background-image: url("images/Final_Plot.png")
+background-size: cover
+background-position: center

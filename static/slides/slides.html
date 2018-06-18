@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css\gadget.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+#_Take A Sad Plot And Make It Better 3.0_
+##Ajinkya Shinde
+
+---
+
+#Dataset Intro
+
+
+* Data : Weather dataset for Portland - 2010 
+
+* About : Climate and historical weather data and information from [NOAA's National Centers for Environmental Information(NCEI)](https://www.ncdc.noaa.gov/about) 
+
+* Some of the datasets listed are :
+
+&gt;	&amp;#x270e; Daily Summaries  
+  &amp;#x270e; `Normals Daily`   
+  &amp;#x270e; Normals Hourly  
+  &amp;#x270e; Normals Monthly  
+ 
+* `Normals Daily` - includes info. on climatological variables such as temperature and precipitation as per 1981 - 2000 Normals
+
+---
+class: middle,center
+
+#Dataset Exploration
+
+
+---
+
+* Read dataset from `csv` 
+
+
+```r
+w_2&lt;-read.csv("../data/1374765.csv")
+glimpse(w_2)
+```
+
+```
+## Observations: 2,920
+## Variables: 6
+## $ STATION         &lt;fct&gt; GHCND:USW00024242, GHCND:USW00024242, GHCND:US...
+## $ STATION_NAME    &lt;fct&gt; PORTLAND TROUTDALE AIRPORT OR US, PORTLAND TRO...
+## $ DATE            &lt;int&gt; 20100101, 20100102, 20100103, 20100104, 201001...
+## $ DLY.TAVG.NORMAL &lt;dbl&gt; 38.2, 38.3, 38.4, 38.5, 38.6, 38.7, 38.8, 38.9...
+## $ DLY.TMAX.NORMAL &lt;dbl&gt; 43.9, 44.0, 44.1, 44.3, 44.4, 44.5, 44.6, 44.7...
+## $ DLY.TMIN.NORMAL &lt;dbl&gt; 32.5, 32.5, 32.6, 32.7, 32.8, 32.9, 32.9, 33.0...
+```
+
+
+---
+
+
+
+
+*  Each record represents values measured at a station-day.
+
+1. STATION / STATION NAME (Max 50 Chars) : details about the  station(city/airport)
+
+3. DATE (6 Digits) : Format `YYYYMMDD` 
+
+4. DLY.TAVG.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily avg. temp.
+
+5. DLY.TMAX.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily maxi. temp.
+
+6. DLY.TMIN.NORMAL (Floating Pt - 1 digits) : Running avg (`1981-2010`) of daily min. temp.
+
+
+
+---
+class: middle, center
+# DataViz 
+
+---
+class: middle: center
+#Questions?
+
+--
+
+#_What?_ 
+
+--
+
+#`Warmest Temp.` in Portland in the year 2010
+
+--
+#_When?_
+
+--
+#`Day`
+
+
+---
+
+
+And the answer is
+
+---
+background-image: url("images/Final_Plot.png")
+background-size: cover
+background-position: center
+
+---
+class: middle,center
+#Now let's do a walkthrough
+
+--
+
+#`Step 1: Let's Define the axis`
+---
+background-image: url("images/Step1.png")
+background-size: cover
+background-position: center
+
+---
+class:middle,center
+#`Step 2: Plot the data`
+---
+background-image: url("images/Step2_1.png")
+background-size: cover
+background-position: center
+
+---
+background-image: url("images/Step2_2.png")
+background-size: cover
+background-position: center
+
+
+
+---
+class:middle,center
+#`Step 3: Cleanup the plot`
+##Include only relevant details
+---
+background-image: url("images/Step3_1.png")
+background-size: cover
+background-position: center
+
+---
+background-image: url("images/Step3_2.png")
+background-size: cover
+background-position: center
+---
+class:middle,center
+#`Step 4: Finally...`
+###Prettify the plot
+---
+background-image: url("images/Final_Plot.png")
+background-size: cover
+background-position: center
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

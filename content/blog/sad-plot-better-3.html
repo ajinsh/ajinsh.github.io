@@ -1,0 +1,74 @@
+---
+title: Take A Sad Plot And Make It Better 2.0 - Graph 3
+author: Ajinkya Shinde
+date: '2018-06-16'
+slug: sad-plot-better-3
+categories: []
+tags:
+  - ggplot2
+  - dplyr
+  - tidyverse
+description: Desc
+hacker_news_id: ''
+lobsters_id: ''
+meta_img: /images/image.jpg
+---
+
+
+
+<div id="relevant-r-code" class="section level3">
+<h3>1. Relevant R Code</h3>
+<pre class="r"><code>moma &lt;- read_csv(here(&quot;static&quot;, &quot;data&quot;, &quot;artworks-cleaned.csv&quot;))
+
+f_moma&lt;-moma %&gt;%
+  filter(artist_gender == &quot;Female&quot;)  
+
+ 
+f_moma2&lt;-count(f_moma,year_created,artist_gender)
+
+
+ggplot(f_moma2,aes(x=year_created,y=n))+
+  geom_col(colour = &quot;#414a4c&quot;,fill=&quot;#d26868&quot;)+
+    scale_y_continuous(expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0))+
+  labs(x=&quot;Year paintings were created&quot;,y=&quot;Number of 
+       Paintings created&quot;,
+    title=&quot;MoMA, Female paintings over the years&quot;)+
+  geom_smooth(model=lm,se=FALSE,color=&quot;#5e020c&quot;)+
+  theme_tufte(base_family = &quot;Palatino Linotype&quot;) +
+  theme(plot.title = element_text(hjust = 0.5)) </code></pre>
+<p><img src="/blog/sad-plot-better-3_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="description-of-the-type-of-graph." class="section level3">
+<h3>2. Description of the TYPE of graph.</h3>
+<p>The graph is a bar chart with the geom_smooth line showing the trend line.</p>
+</div>
+<div id="description-of-the-data-you-used" class="section level3">
+<h3>3. Description of the DATA you used</h3>
+<p>The data refers to the moma dataset. In this graph, the final data frame is f_moma2(final moma). The quantitative variable is the count of number of paintings created.The qualitative variable is the year during which the paintings were created</p>
+</div>
+<div id="description-of-the-audience-you-are-aiming-for" class="section level3">
+<h3>4. Description of the AUDIENCE you are aiming for</h3>
+<p>The audience over here is someone who wants to see the paintings done by women over the years</p>
+</div>
+<div id="representation-description" class="section level3">
+<h3>5. Representation Description:</h3>
+<p>This graph shows the count of number of paintings done by women across the years.</p>
+</div>
+<div id="how-to-read-it-what-to-look-for" class="section level3">
+<h3>6. How to read it &amp; What to look for</h3>
+<p>For year-gap on x-axis, read the number of paintings created during that period.</p>
+<p><strong>Major Highlights</strong> It seems that Women actually painted more paintings during the year 1960-2000. Also,the highest number of paintings(15) around 1985-1990.</p>
+</div>
+<div id="presentation-tips" class="section level3">
+<h3>7. Presentation tips</h3>
+<p>Using scale_x_continuous and scale_y_continuous, the padding at the starting and ending of the x-axis has been removed. The color scheme used is in relation to the artist-gender(female). The trend line has been added to get the sense of overall increase/decrease using geom_smooth</p>
+</div>
+<div id="variations-and-alternatives" class="section level3">
+<h3>8. Variations and alternatives</h3>
+<p>This plot can be improved by including the Male gender to see how the Female’s performed wrt Male artists.</p>
+</div>
+<div id="how-i-created-it" class="section level3">
+<h3>9. How I created it</h3>
+<p>I formulated the question of what exactly I want: I have to see the diversity in the paintings created as per artist’s gender. First, I filtered the data-set on Male and Female. But due to large number of overlapping points , the stacked bar chart wasn’t the perfect fit. So, I decided to go with only one gender. Due to uncontinuity in the year column, the geom_line wasn’t the perfect fit, so decided to go with geom_col</p>
+</div>

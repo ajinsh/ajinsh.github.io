@@ -1,0 +1,93 @@
+---
+title: 'Take A Sad Plot And Make It Better 2.0 - Graph 2'
+author: Ajinkya Shinde
+date: '2018-06-14'
+slug: sad-plot-better-2
+categories: []
+tags:
+  - ggplot2
+  - dplyr
+  - tidyverse
+description: Desc
+hacker_news_id: ''
+lobsters_id: ''
+meta_img: /images/image.jpg
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r echo=FALSE,message= FALSE,warning=FALSE}
+library(dplyr)
+library(knitr)
+library(tidyr)
+library(ggplot2)
+library(ggmosaic)
+```
+
+### 1. Relevant R-Code
+
+```{r message= FALSE,warning=FALSE}
+cereal_untidy<-read.csv(file="../../static/data/cereal.csv")
+
+cereal_tidy<-cereal_untidy %>% 
+  gather(nutrition,nutr_stat,c("calories","protein","fat","sodium",
+  "fiber","carbo","sugars","potass","vitamins")) %>% 
+  select(name,mfr,type,nutrition,nutr_stat) %>% 
+  filter(nutrition==c("calories","protein","fat","carbo"))
+
+
+ggplot(cereal_tidy)+geom_mosaic(aes(x=product(nutrition,mfr),
+                                    fill=factor(nutrition))) + 
+  labs(x="Manufacturer", y ="Nutrition Breakdown") +
+  guides(fill=guide_legend(title = "Nutrient", reverse = TRUE))
+
+```
+
+### 2. Description of the TYPE of graph 
+
+This type of graph is a Marimekko chart
+
+
+### 3. Description of the DATA you used 
+
+The data is gathered from [Kaggle Dataset](https://www.kaggle.com/crawford/80-cereals/data).It gives the nutrient information(such as calories,fat,protein etc.) for all the cereals across selected 7 brands.The quantitative varaibles such as calories,fat,protien etc are stored in individual column. The quantitative varaibles are name,manufacture name,type of cereal i.e hot/cold in individual columns.
+
+
+
+
+### 3. Representation Description: WHAT ARE YOU TRYING TO SHOW! Tell us about the graph, what it shows, how it can be used, definitions of different graph parts, etc.
+
+The chart shows the distribution of the selected nutrients information such as calories and nutrient breakup across different manufacturer.
+
+### 4. How to read it & What to look for: How should a newbie to this graph approach interpreting it? What are the major highlights of the graph type?
+
+For a newbie, he should make a rough observation about the number of products available across different manufacturer looking at the width and get a glance of nutrient distribution.
+
+**Major Highlights of the graph type**
+
+After observation,it seems like product N offers more protein as compared to other products such as P,Q. 
+Also, the width of the columns indicate the no. of products available such as manufacturer K has lot of products in the data set.
+
+
+
+### 5. Presentation tips: address how annotation is/can be used, how color is/can be used, and how the general composition is arranged (how are things arranged, scale, etc.)
+
+Annotation can be used to represent the  relative % such that the % distribution also takes into consideration the width variable.The color can be improved using categorical color scheme since the chart is with default color scheme
+
+
+### 6. Variations and alternatives: are there common variations of this graph? How are they different, how are they used? Are there alternatives?
+
+The common variations of this chart can be Treemap,Radial column chart which displays breakup of individual categorical variables and the same time allows to compare individual breakups with others.
+
+
+### 7. How I created it: Methods section. How did you go about making this specific graph? 
+
+The dataset is in the untidy form which was tidied such that all the nutrient measurables are stored in `nutr_stat` column using `tidyr` package.After tidying the dataset,I began to evaluate different quantitative variables and how can I analyze them.Then,I listed the possible graphs available aligned with the chart I wanted.Earlier, I used stacked bar chart but it was not able to encode `nutr_stats` column for y aesthetic. Then I settled for Marimekko chart.
+
+
+

@@ -1,0 +1,77 @@
+---
+title: 'Take A Sad Plot And Make It Better 2.0 - Graph 1'
+author: Ajinkya Shinde
+date: '2018-06-13'
+slug: sad-plot-better-1
+categories:
+  - R
+tags:
+  - ggplot2
+description: Desc
+hacker_news_id: ''
+lobsters_id: ''
+meta_img: /images/image.jpg
+
+---
+
+
+
+<div id="relevant-r-code" class="section level3">
+<h3>1. Relevant R-code</h3>
+<pre class="r"><code>meanGDP_country &lt;- gapminder %&gt;% 
+ group_by(country,continent) %&gt;% 
+  summarize(meanGdp=mean(gdpPercap))
+
+ggplot(meanGDP_country,aes(x=meanGdp)) + geom_histogram(binwidth=500,fill=&quot;white&quot;,
+color=&quot;black&quot;) +
+  coord_cartesian(xlim=c(0,30000))+
+  facet_wrap(~continent)+
+  xlab(&quot;Mean GDP across countries within continent&quot;)</code></pre>
+<p><img src="/blog/sad-plot-better-1_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="description-of-the-type-of-graph" class="section level3">
+<h3>2. Description of the Type of Graph</h3>
+<p>This is a histogram used to measure the spread of GDP across countries within each continent</p>
+</div>
+<div id="description-of-the-data-used" class="section level3">
+<h3>3. Description of the DATA used</h3>
+<pre class="r"><code>glimpse(meanGDP_country)</code></pre>
+<pre><code>## Observations: 142
+## Variables: 3
+## $ country   &lt;fct&gt; Afghanistan, Albania, Algeria, Angola, Argentina, Au...
+## $ continent &lt;fct&gt; Asia, Europe, Africa, Africa, Americas, Oceania, Eur...
+## $ meanGdp   &lt;dbl&gt; 802.6746, 3255.3666, 4426.0260, 3607.1005, 8955.5538...</code></pre>
+<p>The Data consists of nominal/qualitative variables - country and continent and the quantitative variable is meanGDP which is calculated as the mean of GDP across a country in a given continent</p>
+</div>
+<div id="description-of-the-audience" class="section level3">
+<h3>4. Description of the <em>AUDIENCE</em></h3>
+<p>This dataset can be used for census analyst who wants to see the GDP growth across the continents from the data set</p>
+</div>
+<div id="representation-description" class="section level3">
+<h3>5. Representation description</h3>
+<p>In the above graph, we are trying to see the spread of gdp across countries within each continent. The facet_wrap divides the graph across Continent. In each of the individual graph,individual bar line represents mean of GDP across the countries. The visualization can be used to get the sense of skewness/type of distribution across the continent.</p>
+</div>
+<div id="how-to-read-it-what-to-look-for" class="section level3">
+<h3>6. How to read it &amp; what to look for?</h3>
+<p>We try to see the skewness and get a general idea of distribution of GDP across each of the continent. A newbie can say that the graph for Europe looks normally distributed and should look to get basic sense of distribution.</p>
+</div>
+<div id="presentation-tips" class="section level3">
+<h3>7. Presentation Tips:</h3>
+<p>We can use discrete color palette to differentiate among the different ordinal variables. Also , the distinct color scheme also portrays that the distribution for each continent is independent of each other.</p>
+</div>
+<div id="variations-and-creations" class="section level3">
+<h3>8. Variations and creations:</h3>
+<p>Below is the variation of the above graph. A ridge line chart below can be used to compare the distributions amongst themselves to see which how the continents perform against each other.</p>
+<pre class="r"><code>library(ggridges)
+ggplot(meanGDP_country,aes(x=meanGdp,y=continent,color=continent)) + 
+  geom_density_ridges(scale = 0.9)+
+    scale_color_hue(l = 45)+
+  xlab(&quot;Mean GDP across countries within continent&quot;)+
+  ylab(&quot;Continent&quot;)</code></pre>
+<pre><code>## Picking joint bandwidth of 1730</code></pre>
+<p><img src="/blog/sad-plot-better-1_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="how-i-created-it" class="section level3">
+<h3>9. How I created it?</h3>
+<p>I thought of showing countries in a single graph with graph being created for each continent. Thus, I created meanGDP_country variable to store the dataset in that format.Finally, used GGPlot2 to create the histogram.</p>
+</div>

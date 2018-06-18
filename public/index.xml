@@ -6,20 +6,56 @@
     <description>Recent content on Ajinkya Shinde</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Jun 2018 06:09:00 -0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A small project example : add yours !</title>
-      <link>/projects/small-project/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      <title>TAKE A SAD PLOT AND MAKE IT BETTER 3.0</title>
+      <link>/projects/sad-plot-better-3/</link>
+      <pubDate>Mon, 18 Jun 2018 06:09:00 -0800</pubDate>
       
-      <guid>/projects/small-project/</guid>
-      <description>Along with Ford Prefect, Dent barely escapes the Earth&amp;rsquo;s destruction as it is demolished to make way for a hyperspace bypass. Arthur spends the next several years, still wearing his dressing gown, helplessly launched from crisis to crisis while trying to straighten out his lifestyle.
- He rather enjoys tea, but seems to have trouble obtaining it in the far reaches of the galaxy.
- In time, he learns how to fly and carves a niche for himself as a sandwich-maker.</description>
+      <guid>/projects/sad-plot-better-3/</guid>
+      <description>1. Relevant R Codew_2&amp;lt;-read.csv(&amp;quot;../../static/data/1374765.csv&amp;quot;)w_2&amp;lt;- w_2 %&amp;gt;% mutate(MDate=as.character(DATE)) %&amp;gt;% filter(STATION==&amp;quot;GHCND:USW00024229&amp;quot;) %&amp;gt;% select(MDate,DLY.TMAX.NORMAL) %&amp;gt;% mutate(MDate=ymd(MDate))w_monthly&amp;lt;- w_2 %&amp;gt;% mutate(FMonth=month((MDate),label = FALSE),TotDM=days_in_month(MDate),FDay=day(MDate)) llabels &amp;lt;- c(&amp;quot;1&amp;quot;=&amp;quot;Jan&amp;quot;,&amp;quot;2&amp;quot;=&amp;quot;Feb&amp;quot;,&amp;quot;3&amp;quot;=&amp;quot;Mar&amp;quot;,&amp;quot;4&amp;quot;=&amp;quot;Apr&amp;quot;,&amp;quot;5&amp;quot;=&amp;quot;May&amp;quot;,&amp;quot;6&amp;quot;=&amp;quot;Jun&amp;quot;,&amp;quot;7&amp;quot;=&amp;quot;Jul&amp;quot;,&amp;quot;8&amp;quot;=&amp;quot;Aug&amp;quot;,&amp;quot;9&amp;quot;=&amp;quot;Sep&amp;quot;,&amp;quot;10&amp;quot;=&amp;quot;Oct&amp;quot;,&amp;quot;11&amp;quot;=&amp;quot;Nov&amp;quot;,&amp;quot;12&amp;quot;=&amp;quot;Dec&amp;quot;)n1&amp;lt;-c(&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gold&amp;quot;,&amp;quot;orange&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;,&amp;quot;gray63&amp;quot;)ggplot(w_monthly,aes(x=as.factor(FDay),y=DLY.TMAX.NORMAL,colour=as.factor(FMonth),group=as.factor(FMonth)))+geom_line(alpha=0.5) + geom_point(alpha=0.5)+geom_point(data=filter(w_monthly,FMonth %in% c(7) ),color=&amp;quot;gold&amp;quot;,alpha=0.5)+geom_line(data=filter(w_monthly,FMonth %in% c(7) ),color=&amp;quot;gold&amp;quot;,alpha=0.5)+geom_point(data=filter(w_monthly,FMonth %in% c(8) ),color=&amp;quot;orange&amp;quot;,alpha=0.5)+geom_line(data=filter(w_monthly,FMonth %in% c(8) ),color=&amp;quot;orange&amp;quot;,alpha=0.5)+geom_point(data=filter(w_monthly,DLY.TMAX.NORMAL==82.3 ),color=&amp;quot;red2&amp;quot;)+geom_text(data = filter(w_monthly,FDay %in% c(3)),color = &amp;quot;gray63&amp;quot;,aes(label =month(MDate,label=TRUE)),vjust=&amp;quot;top&amp;quot;)+geom_text(data = filter(w_monthly,DLY.TMAX.NORMAL==82.3 &amp;amp; FDay&amp;gt;20 ),color = &amp;quot;red2&amp;quot;,aes(label = ceiling(DLY.</description>
+    </item>
+    
+    <item>
+      <title>Take A Sad Plot And Make It Better 2.0 - Graph 4</title>
+      <link>/blog/sad-plot-better-4/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/sad-plot-better-4/</guid>
+      <description>1. Relevant R Code&amp;quot;%||%&amp;quot; &amp;lt;- function(a, b) {if (!is.null(a)) a else b}geom_flat_violin &amp;lt;- function(mapping = NULL, data = NULL, stat = &amp;quot;ydensity&amp;quot;,position = &amp;quot;dodge&amp;quot;, trim = TRUE, scale = &amp;quot;area&amp;quot;,show.legend = NA, inherit.aes = TRUE, ...) {layer(data = data,mapping = mapping,stat = stat,geom = GeomFlatViolin,position = position,show.legend = show.legend,inherit.aes = inherit.aes,params = list(trim = trim,scale = scale,.</description>
+    </item>
+    
+    <item>
+      <title>Take A Sad Plot And Make It Better 2.0 - Graph 3</title>
+      <link>/blog/sad-plot-better-3/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/sad-plot-better-3/</guid>
+      <description>1. Relevant R Codemoma &amp;lt;- read_csv(here(&amp;quot;static&amp;quot;, &amp;quot;data&amp;quot;, &amp;quot;artworks-cleaned.csv&amp;quot;))f_moma&amp;lt;-moma %&amp;gt;%filter(artist_gender == &amp;quot;Female&amp;quot;) f_moma2&amp;lt;-count(f_moma,year_created,artist_gender)ggplot(f_moma2,aes(x=year_created,y=n))+geom_col(colour = &amp;quot;#414a4c&amp;quot;,fill=&amp;quot;#d26868&amp;quot;)+scale_y_continuous(expand = c(0, 0)) +scale_x_continuous(expand = c(0, 0))+labs(x=&amp;quot;Year paintings were created&amp;quot;,y=&amp;quot;Number of Paintings created&amp;quot;,title=&amp;quot;MoMA, Female paintings over the years&amp;quot;)+geom_smooth(model=lm,se=FALSE,color=&amp;quot;#5e020c&amp;quot;)+theme_tufte(base_family = &amp;quot;Palatino Linotype&amp;quot;) +theme(plot.title = element_text(hjust = 0.5)) 2. Description of the TYPE of graph.The graph is a bar chart with the geom_smooth line showing the trend line.</description>
+    </item>
+    
+    <item>
+      <title>Take A Sad Plot And Make It Better 2.0 - Graph 2</title>
+      <link>/blog/sad-plot-better-2/</link>
+      <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/sad-plot-better-2/</guid>
+      <description>1. Relevant R-Codecereal_untidy&amp;lt;-read.csv(file=&amp;quot;../../static/data/cereal.csv&amp;quot;)cereal_tidy&amp;lt;-cereal_untidy %&amp;gt;% gather(nutrition,nutr_stat,c(&amp;quot;calories&amp;quot;,&amp;quot;protein&amp;quot;,&amp;quot;fat&amp;quot;,&amp;quot;sodium&amp;quot;,&amp;quot;fiber&amp;quot;,&amp;quot;carbo&amp;quot;,&amp;quot;sugars&amp;quot;,&amp;quot;potass&amp;quot;,&amp;quot;vitamins&amp;quot;)) %&amp;gt;% select(name,mfr,type,nutrition,nutr_stat) %&amp;gt;% filter(nutrition==c(&amp;quot;calories&amp;quot;,&amp;quot;protein&amp;quot;,&amp;quot;fat&amp;quot;,&amp;quot;carbo&amp;quot;))ggplot(cereal_tidy)+geom_mosaic(aes(x=product(nutrition,mfr),fill=factor(nutrition))) + labs(x=&amp;quot;Manufacturer&amp;quot;, y =&amp;quot;Nutrition Breakdown&amp;quot;) +guides(fill=guide_legend(title = &amp;quot;Nutrient&amp;quot;, reverse = TRUE))2. Description of the TYPE of graphThis type of graph is a Marimekko chart
+3. Description of the DATA you usedThe data is gathered from Kaggle Dataset.It gives the nutrient information(such as calories,fat,protein etc.) for all the cereals across selected 7 brands.</description>
+    </item>
+    
+    <item>
+      <title>Take A Sad Plot And Make It Better 2.0 - Graph 1</title>
+      <link>/blog/sad-plot-better-1/</link>
+      <pubDate>Wed, 13 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/sad-plot-better-1/</guid>
+      <description>1. Relevant R-codemeanGDP_country &amp;lt;- gapminder %&amp;gt;% group_by(country,continent) %&amp;gt;% summarize(meanGdp=mean(gdpPercap))ggplot(meanGDP_country,aes(x=meanGdp)) + geom_histogram(binwidth=500,fill=&amp;quot;white&amp;quot;,color=&amp;quot;black&amp;quot;) +coord_cartesian(xlim=c(0,30000))+facet_wrap(~continent)+xlab(&amp;quot;Mean GDP across countries within continent&amp;quot;)2. Description of the Type of GraphThis is a histogram used to measure the spread of GDP across countries within each continent
+3. Description of the DATA usedglimpse(meanGDP_country)## Observations: 142## Variables: 3## $ country &amp;lt;fct&amp;gt; Afghanistan, Albania, Algeria, Angola, Argentina, Au.</description>
     </item>
     
     <item>
@@ -32,16 +68,16 @@
     </item>
     
     <item>
-      <title>About</title>
+      <title>Bio</title>
       <link>/about/</link>
       <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
       <description>Hi,there! I&amp;rsquo;m Ajinkya Shinde.
-I&amp;rsquo;m a data science enthusiast and practitioner using latest data science toolstack like R, Python.
-I&amp;rsquo;m also an experienced Business Intelligence professional and have worked on wide range of database and BI tools.
+ I&amp;rsquo;m a data science enthusiast and practitioner using latest data science toolstack.
+ I&amp;rsquo;m also an experienced Business Intelligence professional and have worked on wide range of databases and BI tools.
 I&amp;rsquo;m currently pursuing Master&amp;rsquo;s in Computer Science at Portland State University and expect to graduate in June 2019.
-I graduated with a Bachelor&amp;rsquo;s in Computer Engineering from University of Mumbai in June 2013. Having gained expertise as a Business Intelligence Consultant, I helped solve and answer business problems by leveraging existing datawarehouse and BI tools.</description>
+I graduated with a Bachelor&amp;rsquo;s in Computer Engineering from University of Mumbai in June 2013.Having gained professional expertise in a related field, ultimately fueled my interest in data science and shaped my decision to pursue it as a career.</description>
     </item>
     
     <item>
@@ -50,8 +86,7 @@ I graduated with a Bachelor&amp;rsquo;s in Computer Engineering from University 
       <pubDate>Wed, 19 Aug 2015 20:29:37 -0700</pubDate>
       
       <guid>/projects/projects/</guid>
-      <description>In this theme, it is possible to add sections like a Projects one for example. You can add plenty of articles about your projects and a presentation page that will be displayed before the list. All is modulable, if you don&amp;rsquo;t want something.
-A Hollywood-funded film version, produced and filmed in the UK, was released in April 2005, and radio adaptations of the third, fourth, and fifth novels were broadcast from 2004 to 2005.</description>
+      <description>Here is my final project Data Visualization slide deck. Enjoy!</description>
     </item>
     
     <item>
@@ -105,8 +140,7 @@ Follow the following steps:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/home/</guid>
-      <description>_ will display the blog section if there is one, and a text before._
-Hey ! Welcome to the Cocoa Enhanced theme. Here are some articles :</description>
+      <description>Hey ! Welcome to my website. Refer to Bio, Projects, Blog/Posts for more info&amp;hellip;!</description>
     </item>
     
     <item>

@@ -6,10 +6,20 @@
     <description>Recent content in R on Ajinkya Shinde</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 13 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Take A Sad Plot And Make It Better 2.0 - Graph 1</title>
+      <link>/blog/sad-plot-better-1/</link>
+      <pubDate>Wed, 13 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/sad-plot-better-1/</guid>
+      <description>1. Relevant R-codemeanGDP_country &amp;lt;- gapminder %&amp;gt;% group_by(country,continent) %&amp;gt;% summarize(meanGdp=mean(gdpPercap))ggplot(meanGDP_country,aes(x=meanGdp)) + geom_histogram(binwidth=500,fill=&amp;quot;white&amp;quot;,color=&amp;quot;black&amp;quot;) +coord_cartesian(xlim=c(0,30000))+facet_wrap(~continent)+xlab(&amp;quot;Mean GDP across countries within continent&amp;quot;)2. Description of the Type of GraphThis is a histogram used to measure the spread of GDP across countries within each continent
+3. Description of the DATA usedglimpse(meanGDP_country)## Observations: 142## Variables: 3## $ country &amp;lt;fct&amp;gt; Afghanistan, Albania, Algeria, Angola, Argentina, Au.</description>
+    </item>
     
     <item>
       <title>Hello R Markdown</title>
