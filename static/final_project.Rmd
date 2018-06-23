@@ -143,31 +143,6 @@ Fahrenheit and is bucketed with limits from start limit= 42 to end limit=85. The
 
 #8. Variations and creations:
 
-Below is another graph. A radial plot to show the highest day temperature for each month. 
-
-
-
-#9. How I created it?
-
-Steps I followed while creating it:
-
-##9.1 Dataset Finalizing 
-
-The NOAA's website gives access to lot of datasets. However, the values specified in the dataset means different in different dataset.The Daily Max temperature in the Daily Normals dataset means the maximum temperature for a given day. But , the daily max temperature in the Daily Hourly dataset is not the decomposition of the day value across 2 hours. So, I had to switch from the daily hourly dataset to daily normals 
-dataset.Another factor for choosing the dataset was the question to be answered from the dataset. It was somewhat difficult to come up with any sort of meaningful trend/question after combining yearly datasets.
-
-##9.2 Choosing appropriate graph
-
-Since it was a weather dataset, I had envisioned mainly two charts- Radial Plot, Line Charts.Also,google answered charts like heat map, geographic map charts, I finally decided to settle with the Line Chart.I decided this after my ugly rendezvous with the radial plot.
-
-##9.3 Visualizing the plot
-
-The inspiration for visualizing the plot is from Alison's demo for the grouped line plot. To visualize the monthwise trend for the dataset closely aligned with that plot. Also, the pop-out effect demo plot by Alison was the perfect way to make the insight stand out from the 
-visualization.
-
-
-#10. Another Variant
-
 Below is another variant different from the main visualization. Here, on x-axis you have avg. daily temperature and on y-axis you have monthwise high temperature with months going in descending order(top->bottom).Also a vertical line of 82.3 is placed to emphasis on the max. temp over the year
 
 ```{r warning= FALSE, message= FALSE}
@@ -215,9 +190,9 @@ ggplot(t2,aes(x=fct_reorder(as.factor(MDate),FMonth),y=DLY.TMAX.NORMAL)) +
         axis.ticks.y = element_blank(),
         axis.title.y = element_blank())+
   labs(title="Avg. daily max temp over the months in Portland for the year 2010",
-       subtitle="The daily max temp of 83°F lasted for 7 days",
+       subtitle="The daily max temp of 83?F lasted for 7 days",
        caption="Data Source: NOAA's 1981-2010 Climate Normals",
-       y="Avg. Daily Max. Temperature(°F)",
+       y="Avg. Daily Max. Temperature(?F)",
        x="")+
   
   geom_text(aes(x=0,y=82.5,label="82.3"),colour="darkred",
@@ -226,4 +201,26 @@ ggplot(t2,aes(x=fct_reorder(as.factor(MDate),FMonth),y=DLY.TMAX.NORMAL)) +
 
 
 ```
+
+
+
+#9. How I created it?
+
+Steps I followed while creating it:
+
+##9.1 Dataset Finalizing 
+
+The NOAA's website gives access to lot of datasets. However, the values specified in the dataset means different in different dataset.The Daily Max temperature in the Daily Normals dataset means the maximum temperature for a given day. But , the daily max temperature in the Daily Hourly dataset is not the decomposition of the day value across 2 hours. So, I had to switch from the daily hourly dataset to daily normals 
+dataset.Another factor for choosing the dataset was the question to be answered from the dataset. It was somewhat difficult to come up with any sort of meaningful trend/question after combining yearly datasets.
+
+##9.2 Choosing appropriate graph
+
+Since it was a weather dataset, I had envisioned mainly two charts- Radial Plot, Line Charts.Also,google answered charts like heat map, geographic map charts, I finally decided to settle with the Line Chart.I decided this after my ugly rendezvous with the radial plot.
+
+##9.3 Visualizing the plot
+
+The inspiration for visualizing the plot is from Alison's demo for the grouped line plot. To visualize the monthwise trend for the dataset closely aligned with that plot. Also, the pop-out effect demo plot by Alison was the perfect way to make the insight stand out from the 
+visualization.
+
+
 
