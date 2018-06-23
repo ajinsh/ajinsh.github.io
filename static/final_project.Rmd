@@ -166,4 +166,64 @@ The inspiration for visualizing the plot is from Alison's demo for the grouped l
 visualization.
 
 
+#10. Another Variant
+
+Below is another variant different from the main visualization. Here, on x-axis you have avg. daily temperature and on y-axis you have monthwise high temperature with months going in descending order(top->bottom).Also a vertical line of 82.3 is placed to emphasis on the max. temp over the year
+
+```{r warning= FALSE, message= FALSE}
+
+w_seasonal <- w_monthly %>%
+  filter(as.character(MDate) <= "2010-11-30") %>% 
+  mutate(Season=
+        
+    ifelse(as.character(MDate) >="2010-01-01" & as.character(MDate) <="2010-02-28","Winter",
+           ifelse(as.character(MDate) >="2010-03-01" & as.character(MDate) <="2010-05-31","Spring",
+           ifelse(as.character(MDate) >="2010-06-01" & as.character(MDate) <="2010-08-31","Summer",
+           ifelse(as.character(MDate) >="2010-09-01" & as.character(MDate) <="2010-11-30","Fall",      
+                  "N/A"))))    
+           )
+  
+
+
+w_seasonal<-w_seasonal %>% mutate(Season=
+factor(w_seasonal$Season, levels = c("Winter", "Spring", "Summer","Fall")))
+
+t1<-w_seasonal %>% 
+group_by(FMonth) %>% 
+  summarise(DLY.TMAX.NORMAL=max(DLY.TMAX.NORMAL))
+
+t2<-merge(w_seasonal,t1)
+
+
+t2<-t2 %>% mutate(temp=row_number())
+
+t2$temp<-factor(t2$temp,levels=c(1,2,16,3,4,15,5,6,14,13,12,11,10,9,8,7))
+  
+
+ggplot(t2,aes(x=fct_reorder(as.factor(MDate),FMonth),y=DLY.TMAX.NORMAL)) +
+  geom_col(fill="yellow",alpha=0.5)+coord_flip()+
+  geom_col(data=(t2 %>% filter(DLY.TMAX.NORMAL==82.3)),
+           aes(x=fct_reorder(as.factor(MDate),FMonth),y=DLY.TMAX.NORMAL,fill="white"))+
+  geom_text(aes(label=format(t2$MDate,format="%d-%b"),
+                hjust=1.2
+  ))+
+  geom_hline(yintercept = 82.3, linetype="dotted", 
+                        color = "darkred",size=1)+
+  guides(fill=FALSE)+
+  theme_minimal()+
+  theme(axis.text.y=element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank())+
+  labs(title="Avg. daily max temp over the months in Portland for the year 2010",
+       subtitle="The daily max temp of 83°F lasted for 7 days",
+       caption="Data Source: NOAA's 1981-2010 Climate Normals",
+       y="Avg. Daily Max. Temperature(°F)",
+       x="")+
+  
+  geom_text(aes(x=0,y=82.5,label="82.3"),colour="darkred",
+            vjust=-2,hjust=1.45,
+            text=element_text(size=8))
+
+
+```
 

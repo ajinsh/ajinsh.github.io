@@ -67,6 +67,7 @@ ggplot(w_monthly,aes(x=as.factor(FDay),
        y=&quot;Avg. Daily Max. Temperature(°F)&quot;) +
   scale_colour_manual(values=n1,labels=llabels)+
   theme(
+        text=element_text( family=&quot;Palatino Linotype&quot;),
         panel.grid.major = element_line(linetype = 2,color=&quot;#dddddd&quot;), 
         panel.grid.minor = element_line(linetype = 3,color=&quot;#dddddd&quot;), 
         axis.text = element_text(face=&quot;bold&quot;,color=&quot;black&quot;),

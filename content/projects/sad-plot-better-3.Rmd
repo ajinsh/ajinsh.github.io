@@ -22,7 +22,9 @@ library(plotrix)
 library(RColorBrewer)
 library(extrafont)
 library(scales)
+library(extrafont)
 
+loadfonts(device="win")
 ```
 
 #1. Relevant R Code
@@ -87,6 +89,7 @@ ggplot(w_monthly,aes(x=as.factor(FDay),
        y="Avg. Daily Max. Temperature(°F)") +
   scale_colour_manual(values=n1,labels=llabels)+
   theme(
+        text=element_text( family="Palatino Linotype"),
         panel.grid.major = element_line(linetype = 2,color="#dddddd"), 
         panel.grid.minor = element_line(linetype = 3,color="#dddddd"), 
         axis.text = element_text(face="bold",color="black"),
