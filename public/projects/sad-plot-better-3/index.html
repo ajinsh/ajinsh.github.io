@@ -1175,7 +1175,6 @@ ggplot(w_monthly,aes(x=as.factor(FDay),
        y=&quot;Avg. Daily Max. Temperature(°F)&quot;) +
   scale_colour_manual(values=n1,labels=llabels)+
   theme(
-        text=element_text( family=&quot;Palatino Linotype&quot;),
         panel.grid.major = element_line(linetype = 2,color=&quot;#dddddd&quot;), 
         panel.grid.minor = element_line(linetype = 3,color=&quot;#dddddd&quot;), 
         axis.text = element_text(face=&quot;bold&quot;,color=&quot;black&quot;),
@@ -1201,7 +1200,7 @@ ggplot(w_monthly,aes(x=as.factor(FDay),
 </div>
 <div id="description-of-the-audience" class="section level1">
 <h1>4. Description of the <em>AUDIENCE</em></h1>
-<p>This dataset can be used by an weather analyst / general public who wants to see the annual weather highlights for Portland in the year 2010. It can also be published in a scientific journal or a newspaper article.</p>
+<p>This dataset can be used for weather analyst / general public who wants to see the annual weather highlights for Portland in the year 2010. It can also be published in a scientific journal or a newspaper article.</p>
 </div>
 <div id="representation-description" class="section level1">
 <h1>5. Representation description</h1>
@@ -1217,20 +1216,58 @@ ggplot(w_monthly,aes(x=as.factor(FDay),
 </div>
 <div id="variations-and-creations" class="section level1">
 <h1>8. Variations and creations:</h1>
-<p>Below is another graph. A radial plot to show the highest day temperature for each month.</p>
-<pre class="r"><code>plabels&lt;-c(&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,
-        &quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;)
+<p>Below is another variant different from the main visualization. Here, on x-axis you have avg. daily temperature and on y-axis you have monthwise high temperature with months going in descending order(top-&gt;bottom).Also a vertical line of 82.3 is placed to emphasis on the max. temp over the year</p>
+<pre class="r"><code>w_seasonal &lt;- w_monthly %&gt;%
+  filter(as.character(MDate) &lt;= &quot;2010-11-30&quot;) %&gt;% 
+  mutate(Season=
+        
+    ifelse(as.character(MDate) &gt;=&quot;2010-01-01&quot; &amp; as.character(MDate) &lt;=&quot;2010-02-28&quot;,&quot;Winter&quot;,
+           ifelse(as.character(MDate) &gt;=&quot;2010-03-01&quot; &amp; as.character(MDate) &lt;=&quot;2010-05-31&quot;,&quot;Spring&quot;,
+           ifelse(as.character(MDate) &gt;=&quot;2010-06-01&quot; &amp; as.character(MDate) &lt;=&quot;2010-08-31&quot;,&quot;Summer&quot;,
+           ifelse(as.character(MDate) &gt;=&quot;2010-09-01&quot; &amp; as.character(MDate) &lt;=&quot;2010-11-30&quot;,&quot;Fall&quot;,      
+                  &quot;N/A&quot;))))    
+           )
+  
 
-p&lt;-geom_line(data=filter(w_monthly,FMonth %in% c(7,8) ))
+
+w_seasonal&lt;-w_seasonal %&gt;% mutate(Season=
+factor(w_seasonal$Season, levels = c(&quot;Winter&quot;, &quot;Spring&quot;, &quot;Summer&quot;,&quot;Fall&quot;)))
+
+t1&lt;-w_seasonal %&gt;% 
+group_by(FMonth) %&gt;% 
+  summarise(DLY.TMAX.NORMAL=max(DLY.TMAX.NORMAL))
+
+t2&lt;-merge(w_seasonal,t1)
 
 
-lpos&lt;-c(0,30,60,90,120,150,180,210,240,270,300,330)  
+t2&lt;-t2 %&gt;% mutate(temp=row_number())
 
-polar.plot(lengths= w_monthly$DLY.TMAX.NORMAL,
-           label.pos = lpos,labels = plabels,
-           main=&quot;Test Polar Plot&quot;,
-           start=90,clockwise=TRUE,lwd=3,line.col=&quot;4&quot;,
-           rp.type = &quot;p&quot;)</code></pre>
+t2$temp&lt;-factor(t2$temp,levels=c(1,2,16,3,4,15,5,6,14,13,12,11,10,9,8,7))
+  
+
+ggplot(t2,aes(x=fct_reorder(as.factor(MDate),FMonth),y=DLY.TMAX.NORMAL)) +
+  geom_col(fill=&quot;yellow&quot;,alpha=0.5)+coord_flip()+
+  geom_col(data=(t2 %&gt;% filter(DLY.TMAX.NORMAL==82.3)),
+           aes(x=fct_reorder(as.factor(MDate),FMonth),y=DLY.TMAX.NORMAL,fill=&quot;white&quot;))+
+  geom_text(aes(label=format(t2$MDate,format=&quot;%d-%b&quot;),
+                hjust=1.2
+  ))+
+  geom_hline(yintercept = 82.3, linetype=&quot;dotted&quot;, 
+                        color = &quot;darkred&quot;,size=1)+
+  guides(fill=FALSE)+
+  theme_minimal()+
+  theme(axis.text.y=element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank())+
+  labs(title=&quot;Avg. daily max temp over the months in Portland for the year 2010&quot;,
+       subtitle=&quot;The daily max temp of 83?F lasted for 7 days&quot;,
+       caption=&quot;Data Source: NOAA&#39;s 1981-2010 Climate Normals&quot;,
+       y=&quot;Avg. Daily Max. Temperature(?F)&quot;,
+       x=&quot;&quot;)+
+  
+  geom_text(aes(x=0,y=82.5,label=&quot;82.3&quot;),colour=&quot;darkred&quot;,
+            vjust=-2,hjust=1.45,
+            text=element_text(size=8))</code></pre>
 <p><img src="/projects/sad-plot-better-3_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="how-i-created-it" class="section level1">
